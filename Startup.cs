@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Elastic.Apm.AspNetCore;
 
 namespace BooksApi
 {
@@ -42,6 +43,8 @@ namespace BooksApi
             services.AddSwaggerGen();
 
             services.AddHealthChecks();
+
+            
         }
         #endregion
 
@@ -56,6 +59,7 @@ namespace BooksApi
                 app.UseHsts();
             }
             
+            app.UseElasticApm(Configuration);
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
